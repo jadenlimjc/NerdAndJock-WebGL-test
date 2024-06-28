@@ -12,22 +12,28 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
         #unity-container {
-            width: 100vw;
-            height: 100vh;
             position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
         }
         #unity-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
         }
         .feedback-container {
-            margin-top: 20px;
             text-align: center;
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
+            padding: 10px;
+            background-color: #f1f1f1;
         }
     </style>
 </head>
@@ -46,6 +52,11 @@
             <div id="unity-fullscreen-button"></div>
             <div id="unity-build-title">Nerd and Jock</div>
         </div>
+    </div>
+    <div class="feedback-container">
+        <h2>We value your feedback!</h2>
+        <p>After playing the game, please take a moment to fill out our feedback form:</p>
+        <a href="https://forms.gle/N5r44X7sMmkarsmW6" target="_blank" style="font-size: 18px; color: blue; text-decoration: underline;">Fill out the feedback form</a>
     </div>
     <script>
         var container = document.querySelector("#unity-container");
@@ -110,10 +121,5 @@
 
         document.body.appendChild(script);
     </script>
-    <div class="feedback-container">
-        <h2>We value your feedback!</h2>
-        <p>After playing the game, please take a moment to fill out our feedback form:</p>
-        <a href="https://forms.gle/N5r44X7sMmkarsmW6" target="_blank" style="font-size: 18px; color: blue; text-decoration: underline;">Fill out the feedback form</a>
-    </div>
 </body>
 </html>
