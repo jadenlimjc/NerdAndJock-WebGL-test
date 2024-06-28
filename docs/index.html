@@ -120,6 +120,28 @@
         };
 
         document.body.appendChild(script);
+        
+         // Adjust canvas size when entering/exiting fullscreen
+         function adjustCanvasSize() {
+            if (document.fullscreenElement) {
+                var screenWidth = window.innerWidth;
+                var screenHeight = window.innerHeight;
+                var aspectRatio = 16 / 9;
+                
+                if (screenWidth / screenHeight > aspectRatio) {
+                    canvas.style.width = `${screenHeight * aspectRatio}px`;
+                    canvas.style.height = `${screenHeight}px`;
+                } else {
+                    canvas.style.width = `${screenWidth}px`;
+                    canvas.style.height = `${screenWidth / aspectRatio}px`;
+                }
+            } else {
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+            }
+        }
+
+        document.addEventListener('fullscreenchange', adjustCanvasSize);
     </script>
 </body>
 </html>
