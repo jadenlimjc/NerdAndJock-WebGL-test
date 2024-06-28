@@ -61,6 +61,9 @@ sysinfo.txt
 *.unitypackage
 *.app
 
+#macOS auto-generated DS_STORE file
+.DS_Store
+
 # Crashlytics generated file
 crashlytics-build.properties
 
