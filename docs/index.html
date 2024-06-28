@@ -14,24 +14,19 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            justify-content: center;
             align-items: center;
+            height: 100vh;
+            background-color: #000;
         }
         #unity-container {
             position: relative;
             width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            background: #000;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         #unity-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
         }
@@ -40,6 +35,7 @@
             padding: 10px;
             background-color: #f1f1f1;
             width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -128,33 +124,15 @@
 
         document.body.appendChild(script);
 
-        // Adjust canvas size when entering/exiting fullscreen
         function adjustCanvasSize() {
-            if (document.fullscreenElement) {
-                var screenWidth = window.innerWidth;
-                var screenHeight = window.innerHeight;
-                var aspectRatio = 16 / 9;
-                
-                if (screenWidth / screenHeight > aspectRatio) {
-                    canvas.style.width = `${screenHeight * aspectRatio}px`;
-                    canvas.style.height = `${screenHeight}px`;
-                } else {
-                    canvas.style.width = `${screenWidth}px`;
-                    canvas.style.height = `${screenWidth / aspectRatio}px`;
-                }
+            var aspectRatio = 16 / 9;
+            var windowAspectRatio = window.innerWidth / window.innerHeight;
+            if (windowAspectRatio < aspectRatio) {
+                canvas.style.width = `${window.innerWidth}px`;
+                canvas.style.height = `${window.innerWidth / aspectRatio}px`;
             } else {
-                // Set the canvas size to maintain 16:9 aspect ratio within the container
-                var containerWidth = container.clientWidth;
-                var containerHeight = container.clientHeight;
-                var containerAspectRatio = containerWidth / containerHeight;
-                
-                if (containerAspectRatio > 16 / 9) {
-                    canvas.style.width = `${containerHeight * 16 / 9}px`;
-                    canvas.style.height = `${containerHeight}px`;
-                } else {
-                    canvas.style.width = `${containerWidth}px`;
-                    canvas.style.height = `${containerWidth * 9 / 16}px`;
-                }
+                canvas.style.width = `${window.innerHeight * aspectRatio}px`;
+                canvas.style.height = `${window.innerHeight}px`;
             }
         }
 
